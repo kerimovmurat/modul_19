@@ -1,0 +1,19 @@
+{% extends "fourth_task/menu.html" %}
+
+{% block pagename %}<h1>{{ title }}</h1>{% endblock %}
+
+{% block menu %}
+    {{ block.super }}
+{% endblock %}
+
+{% block content %}
+
+    <ul>
+        {% for i in list %}
+            <li><p>{{ i.title }} | {{ i.description }}. Стоимость:{{ i.cost }}  <button> Купить </button></p></li>
+        {% endfor %}
+    </ul>
+    <h2 class="center-text">Welcome to the second page</h2>
+    <h3><button><a href="/menu">{{ back }}</a></button></h3>
+
+{% endblock %}

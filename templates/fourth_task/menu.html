@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} {{ title }} {% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+
+</head>
+<body>
+  <header> {% block pagename %} <h1> {{ title }} </h1>{% endblock %} </header><br>
+    <nav>
+      {% block menu %}
+      <ul>
+
+        <a href="#"><h2>{{ main }}</h2></a>
+        <a href="/games"><h2>{{ shop }}</h2></a>
+        <a href="/basket"><h2>{{ basket }}</h2></a>
+      </ul>
+      {% endblock %}
+    </nav>
+  <main>
+    {% block content %}
+
+    {% endblock %}
+  </main>
+</body>
+</html>
