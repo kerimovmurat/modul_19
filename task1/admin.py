@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Buyer, Game
+from .models import Buyer, Game, News
 
 # Register your models here.
 @admin.register(Buyer)
@@ -17,4 +17,11 @@ class GameAdmin(admin.ModelAdmin):
     list_display = ('title', 'cost', 'size')
     search_fields = ('title',)
     list_per_page = 20
+
+@admin.register(News)
+class NewsAdmin(admin.ModelAdmin):
+    list_filter = ('title',)
+    list_display = ('title', 'content', 'date')
+
+
 

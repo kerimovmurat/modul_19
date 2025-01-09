@@ -1,10 +1,11 @@
 from django.template.context_processors import request
+from django.core.paginator import Paginator
 from django.views.generic import TemplateView
 from django.shortcuts import render
 from django.http import HttpResponse
 from .forms import UserRegister
 from .tools import valid_user
-from .models import Buyer, Game
+from .models import Buyer, Game, News
 
 
 # Create your views here.
@@ -13,12 +14,14 @@ def menu(request):
     main = 'Главная'
     shop = 'Магазин'
     basket = 'Корзина'
+    new = 'Новости'
 
     context = {
         'title': title_m,
         'main': main,
-        'shop': 'Магазин',
-        'basket': 'Корзина',
+        'shop': shop,
+        'basket': basket,
+        'new': new,
     }
     return render(request, 'fourth_task/index.html', context)
 
@@ -87,3 +90,13 @@ def sign_up_by_html(request):
             Buyer.objects.create(name=username, balance=100, age=age)
             return HttpResponse(f'Приветствуем, {username}!')
     return render(request, 'fifth_task/registration_page.html', context=info)
+
+def page(request):
+    posts = News.objects.all().order_by('date')
+    paginator = Paginator(posts, 3)
+    page_number = request.GET.get('page')
+    news = paginator.get_page(page_number)
+    context = {
+        'news': news,
+    }
+    return render(request, 'news.html', context)
