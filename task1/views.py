@@ -32,6 +32,7 @@ def play(request):
     shop = 'Магазин'
     basket = 'Корзина'
     back = 'Вернуться обратно'
+    new = 'Новости'
     games = Game.objects.all()
     context = {
         'title': title_s,
@@ -40,6 +41,7 @@ def play(request):
         'shop': shop,
         'basket': basket,
         'back': back,
+        'new': new
     }
     return render(request, 'fourth_task/index2.html', context)
 
@@ -53,6 +55,7 @@ class Cart(TemplateView):
         context['main'] = 'Главная'
         context['shop'] = 'Магазин'
         context['basket'] = 'Корзина'
+        context['new'] = 'Новости'
         return context
 
 def sign_up_by_django(request):
@@ -96,7 +99,9 @@ def page(request):
     paginator = Paginator(posts, 3)
     page_number = request.GET.get('page')
     news = paginator.get_page(page_number)
+    back = 'Вернуться обратно'
     context = {
         'news': news,
+        'back': back,
     }
     return render(request, 'news.html', context)
